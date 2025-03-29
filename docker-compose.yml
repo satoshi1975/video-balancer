@@ -1,16 +1,16 @@
-version: '3.8'
 services:
   web:
     build: .
     ports:
       - "8000:8000"
-    depends_on:
-      - db
     environment:
       - DATABASE_URL=postgresql://user:password@db/dbname
       - PYTHONPATH=/app
+    depends_on:
+       db:
+          condition: service_healthy
     command: /app/start.sh
-
+    
 
   db:
     image: postgres:13
@@ -18,6 +18,11 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: dbname
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d dbname"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     volumes:
       - db_data:/var/lib/postgresql/data
     
