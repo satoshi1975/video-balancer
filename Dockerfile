@@ -9,7 +9,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем остальные файлы (кроме указанных в .dockerignore)
 COPY ./app ./app
 COPY ./start.sh .
-COPY ./migrations ./migrations
+COPY ./alembic.ini ./app/alembic.ini
+COPY ./migrations ./app/migrations
 
 # Делаем скрипт исполняемым
 RUN chmod +x /app/start.sh

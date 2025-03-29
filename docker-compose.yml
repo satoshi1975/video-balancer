@@ -10,10 +10,7 @@ services:
       - DATABASE_URL=postgresql://user:password@db/dbname
       - PYTHONPATH=/app
     command: /app/start.sh
-      
-    # volumes:
-    #   - ./:/app   # Маунтим папку app (для разработки)
-    
+
 
   db:
     image: postgres:13

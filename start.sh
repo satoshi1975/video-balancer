@@ -3,7 +3,7 @@
 set -e
 
 echo "Running migrations..."
-# alembic upgrade head || { echo 'Migration failed, exiting.'; exit 1; }
+alembic upgrade head || { echo 'Migration failed, exiting.'; exit 1; }
 
 echo "Migrations done, starting application..."
 
